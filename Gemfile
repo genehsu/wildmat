@@ -1,4 +1,4 @@
 source :rubygems
 
 gemspec
-gem 'rspec'
+gem 'rspec', '~>2.8'

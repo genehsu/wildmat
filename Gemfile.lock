@@ -25,7 +25,7 @@ PLATFORMS
 
 DEPENDENCIES
   rake
-  rspec
+  rspec (~> 2.8)
   spec
   wildmat!
   yard
