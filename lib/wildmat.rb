@@ -1,6 +1,6 @@
 module Wildmat
 
-  VERSION = '0.0.1'
+  VERSION = '0.9.0'
 
   def self.to_regexp(pattern)
     %r(^#{regexp_pattern(pattern)}$)
@@ -14,7 +14,8 @@ module Wildmat
 
   def self.literal(pattern, i, current)
     return current if i >= pattern.size
-    case pattern[i]
+    next_char = pattern[i].chr
+    case next_char
     when '*'
       current << '.*'
     when '?'
@@ -25,7 +26,7 @@ module Wildmat
       current << '['
       return first_character_class(pattern, i+1, current)
     else
-      current << Regexp.escape(pattern[i])
+      current << Regexp.escape(next_char)
     end
     literal(pattern, i+1, current)
   end
@@ -34,11 +35,12 @@ module Wildmat
     # TODO: raise error? if we reach the end of the pattern
     # in a backslash context
     # return ??? if i > pattern.size
-    case pattern[i]
+    next_char = pattern[i].chr
+    case next_char
     when /\w/
-      current << pattern[i]
+      current << next_char
     else
-      current << '\\' << pattern[i]
+      current << '\\' << next_char
     end
     literal(pattern, i+1, current)
   end
@@ -51,15 +53,16 @@ module Wildmat
     # TODO: raise error? if we reach the end of the pattern
     # in a character class context
     # return ??? if i > pattern.size
-    case pattern[i]
+    next_char = pattern[i].chr
+    case next_char
     when ']'
       current << (first ? '\\]' : ']')
       return literal(pattern, i+1, current) unless first
     when '^'
-      current << pattern[i]
+      current << next_char
       return character_class(pattern, i+1, current, true, false) if first && assertion
     else
-      current << pattern[i]
+      current << next_char
     end
     character_class(pattern, i+1, current)
   end
