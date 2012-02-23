@@ -22,11 +22,10 @@ module Wildmat
     when '\\'
       return backslash(pattern, i+1, current)
     when '['
-      return character_class(pattern, i+1, current)
-    when /\w/
-      current << pattern[i]
+      current << '['
+      return first_character_class(pattern, i+1, current)
     else
-      current << '\\' << pattern[i]
+      current << Regexp.escape(pattern[i])
     end
     literal(pattern, i+1, current)
   end
@@ -44,18 +43,23 @@ module Wildmat
     literal(pattern, i+1, current)
   end
 
-  def self.character_class(pattern, i, current)
+  def self.first_character_class(pattern, i, current)
+    character_class(pattern, i, current, true)
+  end
+
+  def self.character_class(pattern, i, current, first=false, assertion=true)
     # TODO: raise error? if we reach the end of the pattern
     # in a character class context
     # return ??? if i > pattern.size
     case pattern[i]
     when ']'
+      current << (first ? '\\]' : ']')
+      return literal(pattern, i+1, current) unless first
+    when '^'
       current << pattern[i]
-      return literal(pattern, i+1, current)
-    when /\w/
-      current << pattern[i]
+      return character_class(pattern, i+1, current, true, false) if first && assertion
     else
-      current << '\\' << pattern[i]
+      current << pattern[i]
     end
     character_class(pattern, i+1, current)
   end
