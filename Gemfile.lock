@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    wildmat (0.0.1)
+    wildmat (0.9.0)
 
 GEM
   remote: http://rubygems.org/
@@ -20,6 +20,7 @@ GEM
     yard (0.7.5)
 
 PLATFORMS
+  java
   ruby
 
 DEPENDENCIES
