@@ -1,8 +1,8 @@
-= wildmat
+# wildmat
 
 * https://github.com/genehsu/wildmat
 
-== DESCRIPTION:
+## DESCRIPTION
 
 This is a gem to create regexp objects from wildmat patterns
 
@@ -15,23 +15,19 @@ operations are as follows: (from wikipedia http://en.wikipedia.org/wiki/Wildmat)
 * Negation of a set. It is specified the same way as the set with the addition of a caret character (^) at the beginning of the test string just inside the open square bracket.
 * Backslash (\) character to invalidate the special meaning of the open square bracket ([), the asterisk, backslash or the question mark. Two backslashes in sequence will result in the evaluation of the backslash as a character with no special meaning.
 
-== FEATURES/PROBLEMS:
-
-* FIX (list of features or problems)
-
-== SYNOPSIS:
+## SYNOPSIS:
 
   FIX (code sample of usage)
 
-== REQUIREMENTS:
+## REQUIREMENTS:
 
 * wildmat gem
 
-== INSTALL:
+## INSTALL:
 
 * FIX (sudo gem install, anything else)
 
-== DEVELOPERS:
+## DEVELOPERS:
 
 After checking out the source, run:
 
@@ -40,7 +36,7 @@ After checking out the source, run:
 This task will install any missing dependencies, run the tests/specs,
 and generate the RDoc.
 
-== LICENSE:
+## LICENSE:
 
 (The MIT License)
 
